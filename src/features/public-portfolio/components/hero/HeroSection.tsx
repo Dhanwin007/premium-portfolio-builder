@@ -1,35 +1,37 @@
-import { usePublicPortfolioStore } from "@/stores/public-portfolio.store";
+"use client";
 
-import HeroActions from "./HeroActions";
+import type { PublicPortfolio } from "@/features/public-portfolio/types";
 import HeroCover from "./HeroCover";
 import HeroProfile from "./HeroProfile";
 import HeroSocialLinks from "./HeroSocialLinks";
+import HeroActions from "./HeroActions";
 
-export default function HeroSection() {
-    const { portfolio } = usePublicPortfolioStore();
+interface HeroSectionProps {
+    portfolio: PublicPortfolio;
+}
 
-    if (!portfolio) {
-        return null;
-    }
-    //console.log(portfolio.profile.cover_url);
+export default function HeroSection({ portfolio }: HeroSectionProps) {
+    const { profile, portfolioSettings, socialLinks, location } = portfolio;
 
     return (
-        <section className="space-y-8">
+        <section id="hero" className="w-full space-y-4 pt-2">
             <HeroCover
-                coverUrl={portfolio.profile.cover_url}
-                displayName={portfolio.profile.display_name}
+                coverUrl={profile.cover_url}
+                displayName={profile.display_name}
             />
 
             <HeroProfile
-                profile={portfolio.profile}
+                profile={profile}
+                location={location}
+                portfolioSettings={portfolioSettings}
             />
 
             <HeroSocialLinks
-                socialLinks={portfolio.socialLinks}
+                socialLinks={socialLinks}
             />
 
             <HeroActions
-                portfolioSettings={portfolio.portfolioSettings}
+                portfolioSettings={portfolioSettings}
             />
         </section>
     );
