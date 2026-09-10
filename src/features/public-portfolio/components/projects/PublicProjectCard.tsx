@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Star, ExternalLink, Info, Play } from "lucide-react";
+import { Star, ExternalLink, Info, Play, FolderGit2 } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -36,38 +36,39 @@ export default function PublicProjectCard({
     const liveDemoHref = project.live_demo_url ? formatExternalUrl(project.live_demo_url) : null;
 
     return (
-        <div className={`group flex flex-col overflow-hidden rounded-2xl border bg-zinc-950/90 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(217,119,6,0.2)] ${
-            project.featured
-                ? "border-amber-500/70 shadow-[0_0_25px_rgba(217,119,6,0.2)] hover:border-amber-400"
-                : "border-amber-900/30 hover:border-amber-500/50"
-        }`}>
+        <div 
+            onClick={() => onSelectProject(project)}
+            className={`group flex flex-col overflow-hidden rounded-2xl border dark:bg-[#120f0d]/90 bg-white/95 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer noir-card ${
+                project.featured
+                    ? "border-amber-500/60 shadow-[0_0_25px_rgba(245,158,11,0.15)] hover:border-amber-400"
+                    : "dark:border-zinc-800/80 border-stone-300 hover:border-red-600/60"
+            }`}
+        >
             {/* Image Thumbnail Header */}
-            <div 
-                className="relative aspect-video w-full overflow-hidden bg-black cursor-pointer group"
-                onClick={() => onSelectProject(project)}
-            >
+            <div className="relative aspect-video w-full overflow-hidden bg-black group">
                 {coverImage && !imgError ? (
                     <img
                         src={coverImage}
                         alt={project.title}
                         onError={() => setImgError(true)}
-                        className="h-full w-full object-cover sepia-vintage-img transition-transform duration-700 group-hover:scale-110"
+                        className="h-full w-full object-cover cinematic-img transition-transform duration-700 group-hover:scale-105"
                     />
                 ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-black via-amber-950/30 to-black text-amber-500 p-6 text-center">
-                        <span className="text-xs font-mono font-bold uppercase tracking-widest text-amber-400">
-                            [DOSSIER_FILE // {project.title}]
+                    <div className="flex flex-col items-center justify-center h-full w-full dark:bg-gradient-to-br dark:from-black dark:via-[#18120e] dark:to-black bg-gradient-to-br from-stone-200 via-stone-100 to-stone-200 dark:text-zinc-400 text-stone-600 p-6 text-center">
+                        <FolderGit2 className="h-8 w-8 text-red-500/70 mb-2" />
+                        <span className="text-xs font-tech-mono font-bold uppercase tracking-widest dark:text-zinc-300 text-stone-700">
+                            {project.title}
                         </span>
                     </div>
                 )}
 
-                {/* Dark Vignette Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent pointer-events-none" />
+                {/* Vignette Overlay */}
+                <div className="absolute inset-0 dark:bg-gradient-to-t dark:from-[#120f0d] dark:via-black/30 dark:to-transparent bg-gradient-to-t from-white via-white/30 to-transparent pointer-events-none" />
 
-                {/* Hover Info Trigger */}
-                <div className="absolute inset-0 bg-amber-950/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 pointer-events-none">
-                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5 bg-black/90 px-3 py-1.5 rounded-lg border border-amber-500/50 shadow-lg">
-                        <Info className="h-3.5 w-3.5 text-amber-400" />
+                {/* Hover Trigger */}
+                <div className="absolute inset-0 bg-red-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 pointer-events-none">
+                    <span className="text-[11px] font-tech-mono font-bold uppercase tracking-wider text-red-300 flex items-center gap-1.5 bg-black/90 px-3 py-1.5 rounded-xl border border-red-600/50 shadow-lg">
+                        <Info className="h-3.5 w-3.5 text-red-400" />
                         INSPECT DOSSIER
                     </span>
                 </div>
@@ -75,15 +76,15 @@ export default function PublicProjectCard({
                 {/* Badges */}
                 <div className="absolute top-3 left-3 flex gap-2 flex-wrap z-10">
                     {project.featured && (
-                        <Badge className="bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-700 text-amber-100 border border-amber-300/60 gap-1 text-[10px] font-mono font-black uppercase tracking-wider shadow-lg">
-                            <Star className="h-3 w-3 fill-current text-yellow-200" />
-                            GOLD REEL
+                        <Badge className="bg-gradient-to-r from-amber-600 to-amber-700 text-amber-950 border border-amber-300/80 gap-1 text-[10px] font-tech-mono font-bold uppercase tracking-wider shadow-lg">
+                            <Star className="h-3 w-3 fill-current text-amber-950" />
+                            FEATURED
                         </Badge>
                     )}
                     {project.demo_video_url && (
-                        <Badge variant="secondary" className="bg-black/90 text-amber-400 border border-amber-700/50 gap-1 text-[10px] font-mono font-bold uppercase tracking-wider shadow-md">
+                        <Badge variant="secondary" className="bg-black/90 text-red-400 border border-red-800/60 gap-1 text-[10px] font-tech-mono font-bold uppercase tracking-wider shadow-md">
                             <Play className="h-3 w-3 fill-current" />
-                            VHS_PLAY
+                            DEMO REEL
                         </Badge>
                     )}
                 </div>
@@ -92,15 +93,12 @@ export default function PublicProjectCard({
             {/* Content Body */}
             <div className="flex flex-1 flex-col justify-between p-6 space-y-4">
                 <div className="space-y-2">
-                    <h3 
-                        className="text-2xl font-chicano gold-foil-text tracking-wide group-hover:text-amber-300 transition-colors cursor-pointer line-clamp-1"
-                        onClick={() => onSelectProject(project)}
-                    >
+                    <h3 className="text-xl font-cinematic font-bold dark:text-zinc-100 text-stone-900 uppercase tracking-wide group-hover:text-red-500 transition-colors line-clamp-1">
                         {project.title}
                     </h3>
 
                     {project.short_description && (
-                        <p className="text-xs sm:text-sm text-zinc-400 line-clamp-2 leading-relaxed font-sans">
+                        <p className="text-xs sm:text-sm dark:text-zinc-400 text-stone-600 line-clamp-2 leading-relaxed font-sans">
                             {project.short_description}
                         </p>
                     )}
@@ -112,13 +110,13 @@ export default function PublicProjectCard({
                         {visibleTech.map((tech) => (
                             <span
                                 key={tech.id}
-                                className="inline-flex items-center rounded-md bg-zinc-900 px-2 py-0.5 text-[10px] font-mono font-semibold text-amber-300/90 border border-amber-900/40"
+                                className="inline-flex items-center rounded-md dark:bg-black bg-stone-100 px-2.5 py-1 text-[10px] font-tech-mono font-medium dark:text-zinc-300 text-stone-800 border dark:border-zinc-800 border-stone-300"
                             >
                                 {tech.name}
                             </span>
                         ))}
                         {remainingTechCount > 0 && (
-                            <span className="inline-flex items-center rounded-md bg-amber-950/70 px-2 py-0.5 text-[10px] font-mono font-semibold text-amber-400 border border-amber-600/40">
+                            <span className="inline-flex items-center rounded-md bg-red-950/70 px-2 py-1 text-[10px] font-tech-mono font-bold text-red-300 border border-red-800/50">
                                 +{remainingTechCount}
                             </span>
                         )}
@@ -126,14 +124,14 @@ export default function PublicProjectCard({
                 )}
 
                 {/* Footer Links & Actions */}
-                <div className="flex items-center justify-between pt-4 border-t border-amber-900/30">
-                    <div className="flex items-center gap-1.5">
+                <div className="flex items-center justify-between pt-4 border-t dark:border-zinc-800/60 border-stone-200">
+                    <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
                         {githubHref && (
                             <a
                                 href={githubHref}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-amber-400/70 hover:text-amber-200 transition-colors p-2 hover:bg-amber-950/40 rounded-lg border border-transparent hover:border-amber-700/40"
+                                className="dark:text-zinc-400 text-stone-600 dark:hover:text-white hover:text-stone-900 transition-colors p-2 dark:hover:bg-zinc-900 hover:bg-stone-100 rounded-lg border border-transparent dark:hover:border-zinc-800 hover:border-stone-300"
                                 aria-label="GitHub Repository"
                             >
                                 <FaGithub className="h-4 w-4" />
@@ -144,7 +142,7 @@ export default function PublicProjectCard({
                                 href={liveDemoHref}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-amber-400/70 hover:text-amber-200 transition-colors p-2 hover:bg-amber-950/40 rounded-lg border border-transparent hover:border-amber-700/40"
+                                className="dark:text-zinc-400 text-stone-600 dark:hover:text-white hover:text-stone-900 transition-colors p-2 dark:hover:bg-zinc-900 hover:bg-stone-100 rounded-lg border border-transparent dark:hover:border-zinc-800 hover:border-stone-300"
                                 aria-label="Live Demo"
                             >
                                 <ExternalLink className="h-4 w-4" />
@@ -155,8 +153,11 @@ export default function PublicProjectCard({
                     <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => onSelectProject(project)}
-                        className="text-xs font-mono font-bold uppercase tracking-wider text-amber-400 hover:text-amber-100 hover:bg-amber-950/80 border border-amber-600/40 rounded-lg h-9 px-4 transition-all"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onSelectProject(project);
+                        }}
+                        className="text-xs font-tech-mono font-bold uppercase tracking-wider text-red-500 hover:text-white dark:hover:bg-red-950/80 hover:bg-red-600 border border-red-900/60 rounded-xl h-9 px-4 transition-all"
                     >
                         DOSSIER &rarr;
                     </Button>
@@ -165,3 +166,4 @@ export default function PublicProjectCard({
         </div>
     );
 }
+

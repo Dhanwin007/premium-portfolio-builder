@@ -51,13 +51,13 @@ export default function HeroActions({
 
     return (
         <div className="flex flex-col items-center gap-6 w-full pt-6">
-            {/* Resume Button */}
+            {/* Resume / Dossier CTA Button */}
             {showResume && (
                 <div className="flex justify-center">
                     <Button
                         asChild
                         size="lg"
-                        className="rounded-xl gap-3 px-8 h-12 bg-gradient-to-r from-amber-700 via-amber-600 to-red-950 text-amber-100 font-mono font-black uppercase tracking-widest text-xs border border-amber-500/70 hover:border-amber-300 shadow-[0_0_25px_rgba(217,119,6,0.35)] hover:shadow-[0_0_40px_rgba(217,119,6,0.6)] hover:scale-105 transition-all duration-300"
+                        className="rounded-xl gap-3 px-8 h-12 bg-gradient-to-r from-red-800 via-red-700 to-zinc-950 text-white font-tech-mono font-bold uppercase tracking-wider text-xs border border-red-600/70 hover:border-red-400 shadow-[0_0_25px_rgba(185,28,28,0.35)] hover:shadow-[0_0_40px_rgba(220,38,38,0.6)] hover:scale-105 transition-all duration-300"
                     >
                         <a
                             href={portfolioSettings.resume_url!}
@@ -65,8 +65,8 @@ export default function HeroActions({
                             rel="noopener noreferrer"
                             download
                         >
-                            <Download className="h-4 w-4 text-amber-300" />
-                            <span>Download Dossier / Resume</span>
+                            <Download className="h-4 w-4 text-red-300" />
+                            <span>DOWNLOAD DOSSIER / RESUME</span>
                         </a>
                     </Button>
                 </div>
@@ -74,21 +74,21 @@ export default function HeroActions({
 
             {/* Intro Video Card */}
             {introVideoUrl && videoConfig && (
-                <div className="w-full max-w-3xl rounded-2xl border border-amber-600/40 bg-zinc-950/90 backdrop-blur-xl p-5 sm:p-6 shadow-[0_0_40px_rgba(0,0,0,0.9)] space-y-4 relative overflow-hidden group">
-                    {/* Aztec Filigree Top Strip */}
-                    <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-amber-500/80 to-transparent" />
+                <div className="w-full max-w-3xl rounded-2xl dark:border-red-950/60 border-stone-300 dark:bg-[#120f0d]/90 bg-white/95 backdrop-blur-xl p-5 sm:p-6 shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.95)] space-y-4 relative overflow-hidden group noir-card">
+                    {/* Crimson Ambient Glow Strip */}
+                    <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-red-600/80 to-transparent" />
                     
-                    <div className="flex items-center justify-between border-b border-amber-900/40 pb-3">
-                        <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-400">
-                            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-950/80 border border-amber-600/50 text-amber-300">
+                    <div className="flex items-center justify-between border-b dark:border-zinc-800/80 border-stone-200 pb-3">
+                        <div className="flex items-center gap-2 text-xs font-tech-mono uppercase tracking-widest text-red-400">
+                            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-red-950/80 border border-red-800/50 text-red-300">
                                 <Video className="h-4 w-4" />
                             </div>
-                            <span className="gold-foil-text font-black">VHS_REEL // EST. 1990</span>
+                            <span className="font-bold dark:text-zinc-100 text-stone-900">AUDIO_VISUAL_INTRO</span>
                         </div>
-                        <span className="text-[10px] font-mono text-zinc-500 tracking-wider">AUDIO_VISUAL_DECK</span>
+                        <span className="text-[10px] font-tech-mono dark:text-zinc-500 text-stone-500 tracking-wider">MEDIA REEL</span>
                     </div>
 
-                    <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-2xl border border-amber-900/40 group-hover:border-amber-500/50 transition-colors">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-2xl border dark:border-zinc-800/80 border-stone-300 group-hover:border-red-900/60 transition-colors">
                         {videoConfig.type === "iframe" ? (
                             <iframe
                                 src={videoConfig.src}

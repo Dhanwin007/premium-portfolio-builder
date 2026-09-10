@@ -1,6 +1,6 @@
 "use client";
 
-import { GraduationCap, Calendar, Award } from "lucide-react";
+import { GraduationCap, Calendar } from "lucide-react";
 import type { Education } from "@/features/education/types";
 import { Badge } from "@/components/ui/badge";
 
@@ -27,18 +27,18 @@ export default function EducationSection({ education }: EducationSectionProps) {
     const sortedEducation = [...education].sort((a, b) => (a.display_order ?? 0) - (b.display_order ?? 0));
 
     return (
-        <section id="education" className="w-full space-y-8 pt-6">
+        <section id="education" className="w-full space-y-8 pt-8">
             {/* Section Header */}
-            <div className="flex items-center gap-4 border-b border-amber-900/40 pb-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-950/80 text-amber-400 border border-amber-600/50 shadow-[0_0_20px_rgba(217,119,6,0.3)]">
+            <div className="flex items-center gap-4 border-b dark:border-zinc-800/80 border-stone-300 pb-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-950/60 text-red-400 border border-red-900/50 shadow-[0_0_20px_rgba(220,38,38,0.25)]">
                     <GraduationCap className="h-6 w-6" />
                 </div>
                 <div>
-                    <h2 className="text-3xl sm:text-4xl font-chicano gold-foil-text tracking-wide uppercase">
-                        ACADEMIA // DEGREES_&amp;_HONORS
+                    <h2 className="text-2xl sm:text-3xl font-cinematic font-bold dark:text-zinc-100 text-stone-900 uppercase tracking-wider">
+                        ACADEMIC DEGREES &amp; EDUCATION
                     </h2>
-                    <p className="text-xs sm:text-sm font-mono tracking-widest text-zinc-400 uppercase">
-                        [UNIVERSITIES, DEGREES &amp; DIPLOMA RECORDS // EST. 1990]
+                    <p className="text-xs font-tech-mono tracking-widest dark:text-zinc-400 text-stone-600 uppercase">
+                        UNIVERSITIES &amp; ACADEMIC RECORD
                     </p>
                 </div>
             </div>
@@ -53,34 +53,34 @@ export default function EducationSection({ education }: EducationSectionProps) {
                     return (
                         <div
                             key={item.id}
-                            className="flex flex-col justify-between rounded-2xl border border-amber-900/30 bg-zinc-950/90 backdrop-blur-xl p-6 shadow-[0_10px_30px_rgba(0,0,0,0.9)] hover:border-amber-500/50 hover:shadow-[0_10px_30px_rgba(217,119,6,0.2)] transition-all space-y-4 group"
+                            className="flex flex-col justify-between rounded-2xl border dark:border-zinc-800/80 border-stone-300 dark:bg-[#120f0d]/90 bg-white/95 backdrop-blur-xl p-6 shadow-[0_15px_35px_rgba(0,0,0,0.9)] hover:border-red-600/60 hover:shadow-[0_15px_40px_rgba(185,28,28,0.2)] transition-all space-y-4 group noir-card"
                         >
                             <div className="space-y-3">
                                 <div className="flex items-start justify-between gap-3">
                                     <div className="space-y-1">
-                                        <h3 className="text-2xl font-chicano gold-foil-text tracking-wide group-hover:text-amber-300 transition-colors">
+                                        <h3 className="text-xl sm:text-2xl font-cinematic font-bold dark:text-zinc-100 text-stone-900 uppercase tracking-wide group-hover:text-red-500 transition-colors">
                                             {item.institution}
                                         </h3>
-                                        <p className="text-xs font-mono font-bold text-amber-400">
+                                        <p className="text-xs font-tech-mono font-bold text-red-500">
                                             {item.degree} {item.field ? `in ${item.field}` : ""}
                                         </p>
                                     </div>
                                     {item.grade && (
-                                        <Badge variant="secondary" className="bg-amber-950/80 text-amber-300 font-mono font-bold text-xs border border-amber-600/50 uppercase tracking-wider shrink-0 px-3 py-1 rounded-lg">
+                                        <Badge variant="secondary" className="bg-red-950/80 text-red-300 font-tech-mono font-bold text-xs border border-red-800/60 uppercase tracking-wider shrink-0 px-3 py-1 rounded-xl">
                                             Grade: {item.grade}
                                         </Badge>
                                     )}
                                 </div>
 
                                 {dateRange && (
-                                    <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
-                                        <Calendar className="h-3.5 w-3.5 text-amber-500" />
+                                    <div className="flex items-center gap-1.5 text-xs font-tech-mono dark:text-zinc-400 text-stone-600">
+                                        <Calendar className="h-3.5 w-3.5 text-red-500" />
                                         <span>{dateRange}</span>
                                     </div>
                                 )}
 
                                 {item.description && (
-                                    <p className="text-xs sm:text-sm text-zinc-300 whitespace-pre-line leading-relaxed border-t border-amber-900/30 pt-3 font-sans">
+                                    <p className="text-xs sm:text-sm dark:text-zinc-300 text-stone-700 whitespace-pre-line leading-relaxed border-t dark:border-zinc-800/80 border-stone-200 pt-3 font-sans">
                                         {item.description}
                                     </p>
                                 )}
@@ -92,3 +92,4 @@ export default function EducationSection({ education }: EducationSectionProps) {
         </section>
     );
 }
+

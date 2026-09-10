@@ -56,7 +56,7 @@ export default function PublicPortfolioPage() {
 
     if (loading) {
         return (
-            <main className="min-h-screen bg-background text-foreground py-10">
+            <main className="min-h-screen bg-[#080706] text-foreground py-10">
                 <PortfolioSkeleton />
             </main>
         );
@@ -67,26 +67,26 @@ export default function PublicPortfolioPage() {
     }
 
     return (
-        <div className={currentTheme === "dark" ? "dark bg-[#0a0806] text-foreground transition-colors duration-300" : "bg-background text-foreground transition-colors duration-300"}>
-            <div className="relative min-h-screen bg-[#0a0806] text-zinc-100 antialiased selection:bg-amber-500/30 selection:text-amber-200 cinematic-noise-bg overflow-x-hidden">
-                {/* Ambient 90s Lowrider Gold & Crimson Spotlight Overlays */}
-                <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(217,119,6,0.2),transparent_70%)]" />
-                <div className="pointer-events-none absolute top-1/4 -left-48 w-[450px] h-[450px] rounded-full bg-red-950/20 blur-[140px]" />
-                <div className="pointer-events-none absolute top-1/2 -right-48 w-[450px] h-[450px] rounded-full bg-amber-600/15 blur-[140px]" />
-                <div className="pointer-events-none absolute bottom-1/4 left-1/3 w-[500px] h-[500px] rounded-full bg-amber-900/10 blur-[150px]" />
+        <div className={currentTheme === "dark" ? "dark bg-[#080706] text-foreground transition-colors duration-300" : "light bg-[#f6f3ee] text-foreground transition-colors duration-300"}>
+            <div className="relative min-h-screen bg-[#f6f3ee] dark:bg-[#080706] text-stone-900 dark:text-zinc-100 antialiased cinematic-noise-bg overflow-x-hidden transition-colors duration-300">
+                {/* Atmospheric Crimson Light Overlays */}
+                <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[750px] bg-[radial-gradient(ellipse_at_top,rgba(185,28,28,0.1),transparent_70%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(185,28,28,0.18),transparent_70%)]" />
+                <div className="pointer-events-none absolute top-1/4 -left-48 w-[500px] h-[500px] rounded-full bg-red-900/10 dark:bg-red-950/25 blur-[150px]" />
+                <div className="pointer-events-none absolute top-1/2 -right-48 w-[500px] h-[500px] rounded-full bg-amber-600/10 dark:bg-amber-950/20 blur-[150px]" />
+                <div className="pointer-events-none absolute bottom-1/4 left-1/3 w-[550px] h-[550px] rounded-full bg-red-900/10 blur-[160px]" />
 
-                {/* Navigation Header */}
+                {/* Header Navigation */}
                 <PortfolioHeader
                     portfolio={portfolio}
                     currentTheme={currentTheme}
                     onToggleTheme={handleToggleTheme}
                 />
 
-                {/* Main Content Layout */}
+                {/* Main Visual Flow */}
                 <main className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col gap-16 px-4 sm:px-6 py-6 md:py-10">
                     <HeroSection portfolio={portfolio} />
-                    <ProjectsSection projects={portfolio.projects} />
                     <SkillsSection skills={portfolio.skills} />
+                    <ProjectsSection projects={portfolio.projects} />
                     <ExperienceSection experience={portfolio.experience} />
                     <EducationSection education={portfolio.education} />
                     <CertificatesSection certificates={portfolio.certificates} />
