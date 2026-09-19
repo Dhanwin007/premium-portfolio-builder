@@ -1,5 +1,4 @@
 // src/proxy.ts
-
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
@@ -12,10 +11,14 @@ const PUBLIC_ROUTES = [
     "/terms",
     "/privacy",
     "/auth/callback",
+    "/api/portfolio-chat",
+];
+
+const PROTECTED_ROUTES = [
+    "/dashboard",
 ];
 
 export async function proxy(request: NextRequest) {
-
     const response = NextResponse.next();
 
     const supabase = createServerClient(
@@ -41,14 +44,20 @@ export async function proxy(request: NextRequest) {
 
     const pathname = request.nextUrl.pathname;
 
-    const isPublicRoute =
-        PUBLIC_ROUTES.includes(pathname);
+    const isPublicRoute = PUBLIC_ROUTES.includes(pathname);
+
+    const isProtectedRoute = PROTECTED_ROUTES.some(
+        (route) =>
+            pathname === route ||
+            pathname.startsWith(`${route}/`)
+    );
 
     const isPortfolioRoute =
-        pathname.startsWith("/u/");
+        /^\/[^/]+$/.test(pathname) &&
+        !PUBLIC_ROUTES.includes(pathname) &&
+        !isProtectedRoute;
 
     if (isPublicRoute || isPortfolioRoute) {
-
         if (
             user &&
             (pathname === "/login" ||

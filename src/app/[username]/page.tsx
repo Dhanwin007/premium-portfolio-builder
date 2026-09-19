@@ -12,6 +12,7 @@ import CertificatesSection from "@/features/public-portfolio/components/certific
 import AchievementsSection from "@/features/public-portfolio/components/achievements/AchievementsSection";
 import PortfolioHeader from "@/features/public-portfolio/components/nav/PortfolioHeader";
 import PortfolioFooter from "@/features/public-portfolio/components/footer/PortfolioFooter";
+import PortfolioChatbot from "@/features/public-portfolio/components/chat/PortfolioChatbot";
 import { PortfolioSkeleton, PortfolioNotFound } from "@/features/public-portfolio/components/ui/PortfolioSkeleton";
 
 import { usePublicPortfolioStore } from "@/stores/public-portfolio.store";
@@ -95,6 +96,9 @@ export default function PublicPortfolioPage() {
 
                 {/* Footer */}
                 <PortfolioFooter profile={portfolio.profile} />
+
+                {/* Personalized AI Chatbot */}
+                <PortfolioChatbot portfolio={portfolio} />
             </div>
         </div>
     );
