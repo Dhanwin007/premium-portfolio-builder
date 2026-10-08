@@ -41,7 +41,7 @@ class AuthService {
    async forgotPassword(email: string) {
     return await supabase.auth.resetPasswordForEmail(email, {
         redirectTo:
-            "https://premium-portfolio-builder-dhanwing05-gmailcoms-projects.vercel.app/auth/callback",
+            "premium-portfolio-builder-seven.vercel.app/auth/callback",
     });
 }
 // async exchangeRecoveryCode(code: string) {
